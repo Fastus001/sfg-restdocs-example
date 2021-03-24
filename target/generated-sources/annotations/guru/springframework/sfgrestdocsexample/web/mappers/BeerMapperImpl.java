@@ -1,7 +1,9 @@
 package guru.springframework.sfgrestdocsexample.web.mappers;
 
 import guru.springframework.sfgrestdocsexample.domain.Beer;
+import guru.springframework.sfgrestdocsexample.domain.Beer.BeerBuilder;
 import guru.springframework.sfgrestdocsexample.web.model.BeerDto;
+import guru.springframework.sfgrestdocsexample.web.model.BeerDto.BeerDtoBuilder;
 import guru.springframework.sfgrestdocsexample.web.model.BeerStyleEnum;
 import javax.annotation.processing.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-03-24T21:54:22+0100",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 13.0.2 (Oracle Corporation)"
+    date = "2021-03-24T22:41:03+0100",
+    comments = "version: 1.3.0.Final, compiler: javac, environment: Java 13.0.2 (Oracle Corporation)"
 )
 @Component
 public class BeerMapperImpl implements BeerMapper {
@@ -24,22 +26,22 @@ public class BeerMapperImpl implements BeerMapper {
             return null;
         }
 
-        BeerDto beerDto = new BeerDto();
+        BeerDtoBuilder beerDto = BeerDto.builder();
 
-        beerDto.setId( beer.getId() );
+        beerDto.id( beer.getId() );
         if ( beer.getVersion() != null ) {
-            beerDto.setVersion( beer.getVersion().intValue() );
+            beerDto.version( beer.getVersion().intValue() );
         }
-        beerDto.setCreatedDate( dateMapper.asOffsetDateTime( beer.getCreatedDate() ) );
-        beerDto.setLastModifiedDate( dateMapper.asOffsetDateTime( beer.getLastModifiedDate() ) );
-        beerDto.setBeerName( beer.getBeerName() );
+        beerDto.createdDate( dateMapper.asOffsetDateTime( beer.getCreatedDate() ) );
+        beerDto.lastModifiedDate( dateMapper.asOffsetDateTime( beer.getLastModifiedDate() ) );
+        beerDto.beerName( beer.getBeerName() );
         if ( beer.getBeerStyle() != null ) {
-            beerDto.setBeerStyle( Enum.valueOf( BeerStyleEnum.class, beer.getBeerStyle() ) );
+            beerDto.beerStyle( Enum.valueOf( BeerStyleEnum.class, beer.getBeerStyle() ) );
         }
-        beerDto.setUpc( beer.getUpc() );
-        beerDto.setPrice( beer.getPrice() );
+        beerDto.upc( beer.getUpc() );
+        beerDto.price( beer.getPrice() );
 
-        return beerDto;
+        return beerDto.build();
     }
 
     @Override
@@ -48,21 +50,21 @@ public class BeerMapperImpl implements BeerMapper {
             return null;
         }
 
-        Beer beer = new Beer();
+        BeerBuilder beer = Beer.builder();
 
-        beer.setId( dto.getId() );
+        beer.id( dto.getId() );
         if ( dto.getVersion() != null ) {
-            beer.setVersion( dto.getVersion().longValue() );
+            beer.version( dto.getVersion().longValue() );
         }
-        beer.setCreatedDate( dateMapper.asTimestamp( dto.getCreatedDate() ) );
-        beer.setLastModifiedDate( dateMapper.asTimestamp( dto.getLastModifiedDate() ) );
-        beer.setBeerName( dto.getBeerName() );
+        beer.createdDate( dateMapper.asTimestamp( dto.getCreatedDate() ) );
+        beer.lastModifiedDate( dateMapper.asTimestamp( dto.getLastModifiedDate() ) );
+        beer.beerName( dto.getBeerName() );
         if ( dto.getBeerStyle() != null ) {
-            beer.setBeerStyle( dto.getBeerStyle().name() );
+            beer.beerStyle( dto.getBeerStyle().name() );
         }
-        beer.setUpc( dto.getUpc() );
-        beer.setPrice( dto.getPrice() );
+        beer.upc( dto.getUpc() );
+        beer.price( dto.getPrice() );
 
-        return beer;
+        return beer.build();
     }
 }
